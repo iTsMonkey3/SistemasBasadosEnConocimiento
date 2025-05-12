@@ -1,8 +1,28 @@
 ;;1
 (deffunction mostrar-stock-total ()
-  (printout t crlf " Inventario actual " crlf)
+  (printout t crlf "📦  INVENTARIO ACTUAL  " crlf)
+  (printout t "-------------------------" crlf)
   (do-for-all-facts ((?f inventario)) TRUE
-    (printout t "Producto: " ?f:producto ", Modelo: " ?f:modelo ", Stock: " ?f:cantidad crlf)))
+    (bind ?modelo ?f:modelo)
+    (bind ?producto ?f:producto)
+    (bind ?stock ?f:cantidad)
+
+    ;; Buscamos el precio correspondiente al tipo de producto
+    (bind ?precio 
+      (if (eq ?producto "smartphone") 
+        then (do-for-fact ((?p smartphone)) (eq ?p:modelo ?modelo) ?p:precio)
+        else (if (eq ?producto "computadora")
+          then (do-for-fact ((?p computadora)) (eq ?p:modelo ?modelo) ?p:precio)
+          else (if (eq ?producto "accesorio")
+            then (do-for-fact ((?p accesorio)) (eq ?p:modelo ?modelo) ?p:precio)
+            else "N/A"))))
+
+    (printout t "🛒 Producto: " ?producto crlf)
+    (printout t "📌 Modelo: " ?modelo crlf)
+    (printout t "📦 Stock: " ?stock crlf)
+    (printout t "💰 Precio: $" ?precio crlf)
+    (printout t "-------------------------" crlf)))
+
 
 ;;2
 (deffunction mostrar-vales ()
@@ -18,17 +38,6 @@
   (retract ?orden))
 
 ;;21 detalle
-;; (defrule mostrar-detalle-orden
-;;  (orden (cliente ?c) (producto ?p) (cantidad ?q) (metodo-pago ?m))
-;;  =>
-;;  (printout t "-------------------------" crlf)
-;;  (printout t "🧾 Detalle de Orden:" crlf)
-;;  (printout t "- Cliente: " ?c crlf)
-;;  (printout t "- Producto: " ?p crlf)
-;;  (printout t "- Cantidad: " ?q crlf)
-;;  (printout t "- Método de pago: " ?m crlf)
-;;  (printout t "-------------------------" crlf))
-
 (defrule mostrar-detalle-orden
   (orden (cliente ?c) (producto ?p) (modelo ?m) (cantidad ?q) (metodo-pago ?mp))
   (or 
@@ -48,12 +57,6 @@
   (printout t "-------------------------" crlf))
 
 ;;4
-;;(defrule clasif-menudista
-;;  (orden (cliente ?c) (cantidad ?q))
-;;  (test (< ?q 10))
-;;  =>
-;;  (printout t "Cliente " ?c " clasificado como MENUDISTA (Cantidad: " ?q ")." crlf))
-
 (defrule clasif-menudista
   (orden (cliente ?c) (cantidad ?q))
   ?cl <- (cliente (nombre ?c) (tipo ?t))
@@ -66,12 +69,6 @@
 
 
 ;;5
-;; (defrule clasif-mayorista
-;;  (orden (cliente ?c) (cantidad ?q))
-;;  (test (>= ?q 10))
-;;  =>
-;;  (printout t "Cliente " ?c " clasificado como MAYORISTA (Cantidad: " ?q ")." crlf))
-
 (defrule clasif-mayorista
   (orden (cliente ?c) (cantidad ?q))
   ?cl <- (cliente (nombre ?c) (tipo ?t))
@@ -135,10 +132,6 @@
   (bind ?vales (/ (* ?precio ?cantidad) 1000))
   (assert (vale (cliente ?cliente) (cantidad ?vales)))
   (printout t "🎁 Cliente " ?cliente " recibe " ?vales " vales por compra de $" (* ?precio ?cantidad) "." crlf))
-
-
-
-
 
 ;;13
 (defrule oferta-hp-descuento
