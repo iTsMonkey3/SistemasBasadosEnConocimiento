@@ -2,10 +2,12 @@
   ;; Smartphones
   (smartphone (marca "Apple") (modelo "iPhone16") (color "Rojo") (precio 27000))
   (smartphone (marca "Samsung") (modelo "Note21") (color "Negro") (precio 22000))
+  (smartphone (marca "Xiaomi") (modelo "Redmi Note 13") (color "Blanco") (precio 12000))
 
   ;; Computadoras
   (computadora (marca "Apple") (modelo "MacBookPro") (color "Gris") (precio 47000))
   (computadora (marca "Apple") (modelo "MacBookAir") (color "Gris") (precio 32000))
+  (computadora (marca "HP") (modelo "Pavilion") (color "Rojo") (precio 23000))
 
   ;; Accesorios
   (accesorio (tipo "Funda") (modelo "Funda-Universal") (precio 300))
@@ -16,6 +18,7 @@
   (accesorio (tipo "Mica") (modelo "Mica-Privacidad") (precio 200))
 
   ;; Inventario
+  (inventario (producto "smartphone") (modelo "Redmi Note 13") (cantidad 20))
   (inventario (producto "smartphone") (modelo "iPhone16") (cantidad 50))
   (inventario (producto "smartphone") (modelo "Note21") (cantidad 30))
   (inventario (producto "computadora") (modelo "MacBookPro") (cantidad 20))

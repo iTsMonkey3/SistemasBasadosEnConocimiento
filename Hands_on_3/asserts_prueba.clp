@@ -15,3 +15,13 @@
 (assert (orden (producto "smartphone") (modelo "iPhone16") (cantidad 1) (cliente "Juan Perez") (metodo-pago "Contado")))
 
 (assert (orden (producto "computadora") (modelo "MacBookAir") (cantidad 18) (cliente "Logan") (metodo-pago "Contado")))
+
+(assert (orden (producto "computadora") (modelo "MacBookAir") (cantidad 2) (cliente "Ana Lopez") (metodo-pago "Contado")))
+(assert (orden (producto "smartphone") (modelo "iPhone16") (cantidad 1) (cliente "Ana Lopez") (metodo-pago "Contado")))
+(assert (orden (producto "computadora") (modelo "Pavilion") (cantidad 1) (cliente "Juan Perez") (metodo-pago "Contado")))
+(assert (orden (producto "accesorio") (modelo "Funda-Universal") (cantidad 3) (cliente "Ana Lopez") (metodo-pago "Contado")))
+(assert (orden (producto "accesorio") (modelo "Mica-Privacidad") (cantidad 1) (cliente "Ana Lopez") (metodo-pago "Contado")))
+(assert (orden (producto "smartphone") (modelo "iPhone16") (cantidad 1) (cliente "Juan Perez") (metodo-pago "Banamex Oro")))
+(assert (orden (producto "smartphone") (modelo "Note21") (cantidad 1) (cliente "Ana Lopez") (metodo-pago "Liverpool VISA")))
+(mostrar-stock-total)
+(mostrar-vales)

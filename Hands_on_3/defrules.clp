@@ -1,5 +1,5 @@
 ;;1
-(deffunction mostrar-stock-total ()
+ (deffunction mostrar-stock-total ()
   (printout t crlf "📦  INVENTARIO ACTUAL  " crlf)
   (printout t "-------------------------" crlf)
   (do-for-all-facts ((?f inventario)) TRUE
@@ -22,6 +22,28 @@
     (printout t "📦 Stock: " ?stock crlf)
     (printout t "💰 Precio: $" ?precio crlf)
     (printout t "-------------------------" crlf)))
+
+;; (defrule aplicar-vales-solo
+;;  (declare (salience -8)) ; menor prioridad
+;;  (orden (cliente ?c) (producto ?p) (modelo ?m) (cantidad ?q))
+;;  (vale (cliente ?c) (cantidad ?vales))
+;;  (or 
+;;    (and (test (eq ?p "smartphone")) (smartphone (modelo ?m) (precio ?precio)))
+;;    (and (test (eq ?p "computadora")) (computadora (modelo ?m) (precio ?precio)))
+;;    (and (test (eq ?p "accesorio")) (accesorio (modelo ?m) (precio ?precio)))
+;;  )
+;;  =>
+;;  ;; Convertimos vales a pesos (cada vale = 100)
+;;  (bind ?vales-pesos (* ?vales 100))
+;;  (bind ?total (* ?precio ?q))
+;;  (bind ?descuento (min ?total ?vales-pesos))
+;;  (bind ?total-final (- ?total ?descuento))
+;;
+;;  (printout t crlf "💳 Cliente " ?c " tiene " ?vales " vales (equivalentes a $" ?vales-pesos ")" crlf)
+;;  (printout t "💸 Precio original: $" ?total crlf)
+;;  (printout t "🧾 Descuento aplicado con vales: $" ?descuento crlf)
+;;  (printout t "✅ Total a pagar después de vales: $" ?total-final crlf crlf)
+;; )
 
 
 ;;2
